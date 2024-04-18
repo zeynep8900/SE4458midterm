@@ -27,4 +27,5 @@ Unpaid Tuition Status	        YES	      YES
 
 
 My ER diagram:
+![image](https://github.com/zeynep8900/SE4458midterm/assets/93615577/963eb24f-c24b-4c29-a47b-83a81b88f330)
 
