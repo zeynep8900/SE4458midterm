@@ -7,13 +7,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'super-secret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///university.db'  # SQLite veritabanı dosyası
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///university.db'  
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 jwt = JWTManager(app)
 api = Api(app, version='1.0', title='University API', description='APIs for University Operations', prefix='/v1')
-swagger = Swagger(app)  # Swagger instance
+swagger = Swagger(app)  
 
-db = SQLAlchemy(app)  # SQLAlchemy instance
+db = SQLAlchemy(app)  
 
 # University Mobile App Namespace
 university_mobile_app_ns = Namespace('University_Mobile_App', description='Endpoints for University Mobile App')
@@ -157,7 +157,7 @@ class PayTuition(Resource):
         data = request.get_json()
         student_no = data.get('student_no')
         term = data.get('term')
-        # Ödeme işlemi (örnek işlem)
+        # Ödeme işlemi
         return {"payment_status": "Successful"}, 200
 
 
@@ -169,9 +169,8 @@ class AddTuition(Resource):
         data = request.get_json()
         student_no = data.get('student_no')
         term = data.get('term')
-        tuition_total = data.get('tuition_total')  # 'tuition_total' anahtarını doğru şekilde alın
-        # Öğrencinin dönem için öğrenim ücretini ekleyin (örnek işlem)
-        tuition_data[student_no] = {"tuition_total": tuition_total, "balance": 0}  # 'tuition_total' kullanımı düzeltildi
+        tuition_total = data.get('tuition_total')  
+        tuition_data[student_no] = {"tuition_total": tuition_total, "balance": 0}  
         return {"transaction_status": "Success"}, 200
 
 
@@ -184,8 +183,7 @@ class UnpaidTuitionStatus(Resource):
         term = request.args.get('term')
         page = int(request.args.get('page', 1))
         if term in unpaid_tuition:
-            # Gerekiyorsa sayfalama yapın
-            unpaid_students = unpaid_tuition[term][(page-1)*10:page*10]  # Sayfa başına 10 öğe varsayımı
+            unpaid_students = unpaid_tuition[term][(page-1)*10:page*10]  
             return {"unpaid_students": unpaid_students}
         else:
             return {"error": "Term not found"}, 404
