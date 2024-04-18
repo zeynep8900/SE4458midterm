@@ -25,3 +25,6 @@ University Web Site - Admin
 Add Tuition	                  YES	       NO
 Unpaid Tuition Status	        YES	      YES
 
+
+My ER diagram:
+
